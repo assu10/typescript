@@ -1,11 +1,7 @@
 import * as U from "../utils/makeRandomNumber"
+import IPerson from "./IPerson"
 
-export interface IPerson {
-    name: string
-    age: number
-}
-
-class Person implements IPerson {
+export default class Person implements IPerson {
     constructor(public name: string, public age: number) { }
 }
 
