@@ -1,3 +1,9 @@
-import {testMakePerson} from "./utils/makePerson";
+import {IPerson, makePerson} from "./person/Person";
 
-testMakePerson();
+const testMakePerson = (): void => {
+    let assu: IPerson = makePerson('assu')
+    let jhlee: IPerson = makePerson('jhlee')
+    console.log(assu, jhlee)
+}
+
+testMakePerson()
