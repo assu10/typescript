@@ -1,17 +1,18 @@
-import IPerson from "./person/IPerson";
-import Person, {makePerson} from "./person/Person";     // Person 은 export default, makePerson 은 export
-import Chance from 'chance'
-import * as R from 'ramda'
+// 익명 인터페이스
+// 변수 ai 는 interface 키워드도 사용하지 않고, 인터페이스 이름도 없는 익명 인터페이스
+let ai: {
+    name: string
+    age: number
+    etc?: boolean
+} = {name: 'assu', age: 20}
 
-const chance = new Chance()
-let persons: IPerson[] = R.range(0, 3)
-    .map((n: number) => new Person(chance.name(), chance.age()))
-console.log(persons)
-
-const testMakePerson = (): void => {
-    let assu: IPerson = makePerson('assu')
-    let jhlee: IPerson = makePerson('jhlee')
-    console.log(assu, jhlee)
+// 익명 인터페이스 활용
+function printMe(me: {name: string, age: number, etc?: boolean}) {
+    console.log(
+        me.etc ?
+            `${me.name} ${me.age} ${me.etc}` :
+            `${me.name} ${me.age}`
+    )
 }
 
-testMakePerson()
+printMe(ai)     // assu 20
