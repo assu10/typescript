@@ -1,14 +1,23 @@
-// 비구조화 할당
-import {IPerson, ICompany} from "./Interfaces"
+// 잔여 연산
+let address: any = {
+    country: 'Korea',
+    city: 'seoul',
+    address1: 'Jam-sil',
+    address2: '311-10'
+}
+const {country, city, ...detail} = address
+console.log(country)    // Korea
+console.log(detail)     // { address1: 'Jam-sil', address2: '311-10' }
 
-let assu: IPerson = {name: 'assu', age: 20},
-    jhlee: IPerson = {name: 'jhlee'}
 
-let wev: ICompany = {name: 'wev', age: 10},
-    hib: ICompany = {name: 'hib'}
+// 전개 연산
+let coord = {...{x: 0}, ...{y: 0}}
+console.log(coord)  //{ x: 0, y: 0 }
 
-console.log(assu)   // { name: 'assu', age: 20 }
-console.log(jhlee)  // { name: 'jhlee' }
+let part1 = {name: 'assu'}
+let part2 = {age: 20}
+let part3 = {city: 'suwon', country: 'kr'}
+let part4 = {name: 'reAssu'}
+let merged = {...part1, ...part2, ...part3, ...part4}
 
-let {name, age} = assu  // 비구조화 할당
-console.log(name, age)  // assu 20
+console.log(merged) // { name: 'reAssu', age: 20, city: 'suwon', country: 'kr' }
