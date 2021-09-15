@@ -1,18 +1,18 @@
-// 익명 인터페이스
-// 변수 ai 는 interface 키워드도 사용하지 않고, 인터페이스 이름도 없는 익명 인터페이스
-let ai: {
+// 클래스
+class Person1 {
     name: string
-    age: number
-    etc?: boolean
-} = {name: 'assu', age: 20}
-
-// 익명 인터페이스 활용
-function printMe(me: {name: string, age: number, etc?: boolean}) {
-    console.log(
-        me.etc ?
-            `${me.name} ${me.age} ${me.etc}` :
-            `${me.name} ${me.age}`
-    )
+    age?: number
 }
 
-printMe(ai)     // assu 20
+let assu1: Person1 = new Person1();
+assu1.name = 'assu'
+assu1.age = 20;
+
+console.log(assu1)      // Person1 { name: 'assu', age: 20 }
+
+class Person2 {
+    constructor(public name: string, public age?: number) { }
+}
+
+let assu2: Person2 = new Person2('assu2', 20)
+console.log(assu2)  // Person2 { name: 'assu2', age: 20 }
