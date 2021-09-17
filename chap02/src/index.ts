@@ -1,6 +1,11 @@
-// 타입 변환
-let person: object = {name: 'assu', age: 20};
-//person.name = 'assu2';  // TS2339: Property 'name' does not exist on type 'object'.
+// 타입 단언
+interface INameable {
+    name: string
+}
 
-(<{name: string}>person).name = 'assu2';
-console.log(person);    // { name: 'assu2', age: 20 }
+let obj: object = {name: 'assu'};
+
+let name1 = (<INameable>obj).name;
+let name2 = (obj as INameable).name;
+
+console.log(name1, name2);  // assu assu
