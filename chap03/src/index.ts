@@ -1,15 +1,12 @@
-// 선택적 매개변수
-type OptionalArgFunc = (p1: string, p2?: number) => void;
+// 함수 표현식
 
-function fn(p1: string, p2?: number): void {
-    console.log(`p2: ${p2}`);
+function add1(a: number, b: number): number {
+    return a+b;
 }
 
-let fn2: OptionalArgFunc = function(a: string, b?: number) : void {
-    console.log(`b: ${b}`);
+let add2 = function(a: number, b: number): number {
+    return a+b;
 }
 
-fn('assu', 2);   // p2: 2
-fn('assu');          // p2: undefined
-fn2('assu', 2);  // b: 2
-fn2('assu');         // b: undefined
+console.log(add1(1, 2));
+console.log(add2(1, 2));
