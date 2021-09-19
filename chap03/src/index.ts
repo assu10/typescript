@@ -1,12 +1,6 @@
-// 함수 표현식
+// 함수 호출 연산자
 
-function add1(a: number, b: number): number {
+let funcExpression = function(a: number, b: number): number {
     return a+b;
-}
-
-let add2 = function(a: number, b: number): number {
-    return a+b;
-}
-
-console.log(add1(1, 2));
-console.log(add2(1, 2));
+};
+let value = funcExpression(1, 2);
