@@ -8,7 +8,7 @@
     "baseUrl": ".",
     "sourceMap": true,
     "downlevelIteration": true,
-    "noImplicitAny": true,
+    "strict": true,
     "paths": { "*": ["node_modules/*"] }
   },
   "include": ["src/**/*"]

@@ -1,11 +1,9 @@
-// 함수 선언문
-function add(a: number, b: number): number {
-    return a+b;
-}
-
-// void type
+// 함수 시그니처
 function printMe(name: string, age: number) : void {
     console.log(`name: ${name}, age: ${age}`);
 }
 
-printMe('assu', 20);
+let printMeSignature: (a: string, b: number) => void = function (name: string, age: number): void {
+    console.log(`name: ${name}, age: ${age}`);
+}
+printMeSignature('assu', 20);
