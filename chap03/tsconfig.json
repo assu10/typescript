@@ -9,6 +9,7 @@
     "sourceMap": true,
     "downlevelIteration": true,
     "strict": true,
+    "noImplicitThis": false,
     "paths": { "*": ["node_modules/*"] }
   },
   "include": ["src/**/*"]

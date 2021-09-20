@@ -1,5 +1,6 @@
-// function 함수와 this 키워드
+// 메서드
 
-let add = new Function('a', 'b', 'return a+b')
-let result = add(1, 2)
-console.log(result)     // 3
+import {A} from "./A";
+
+let a: A = new A
+a.method()  // value: 1
