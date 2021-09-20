@@ -1,9 +1,9 @@
-// 정적 메서드
+// 메서드 체인
 
-class C {
-    static printMe(): string {
-        return `print Me`
-    }
-}
+import {Calc} from "./chain";
 
-console.log(C.printMe())    // print Me
+let calc = new Calc
+let result = calc.add(1).add(2).multiple(3)
+
+console.log(result)         // Calc { value: 9 }
+console.log(result.value)   // 9
