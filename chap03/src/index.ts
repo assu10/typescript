@@ -1,12 +1,9 @@
-// 클래스 메서드 구문
+// 정적 메서드
 
-import {A, B} from "./A";
+class C {
+    static printMe(): string {
+        return `print Me`
+    }
+}
 
-let a: A = new A
-a.method()  // value: 1
-
-let b: B = new B()
-let b2: B = new B(3)
-
-b.method()  // value: 1
-b2.method()  // value: 3
+console.log(C.printMe())    // print Me
