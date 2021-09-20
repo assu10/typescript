@@ -10,4 +10,4 @@ const calc = (value: number, cb: (c: number) => void): void => {
     cb(result);
 }
 
-calc(30, (result: number) => console.log(`result is ${result}`))
+calc(30, (result: number) => console.log(`result is ${result}`))    // 90
