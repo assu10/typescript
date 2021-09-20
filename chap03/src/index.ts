@@ -1,12 +1,11 @@
-// 고차 함수
+// 매개변수 기본값 설정
 
-import {NumberToNumberFunc, reAdd} from "./nested";
+export type Person = { name: string, age: number };
 
-// 변수 fn 에 담긴 값은 NumberToNumberFunc 타입의 함수 표현식
-let fn: NumberToNumberFunc = reAdd(1);
+export const makePerson = (name: string, age: number = 10): Person => {
+    const person = { name: name, age: age};
+    return person;
+}
 
-let result = fn(2);
-
-console.log(result);    // 3
-console.log(reAdd(1)(2));   // 3
-console.log(reAdd(1));   // [Function: _add]
+console.log(makePerson('assu'));            // { name: 'assu', age: 10 }
+console.log(makePerson('assu', 20));   // { name: 'assu', age: 20 }
