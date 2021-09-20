@@ -1,13 +1,12 @@
-// 중첩 함수
+// 고차 함수
 
-const calc = (value: number, cb: (c: number) => void): void => {
-    let add = (a: number, b: number) => a+b;
-    function multiply(a: number, b: number) {
-        return a*b;
-    }
+import {NumberToNumberFunc, reAdd} from "./nested";
 
-    let result = multiply(add(1, 2), value);
-    cb(result);
-}
+// 변수 fn 에 담긴 값은 NumberToNumberFunc 타입의 함수 표현식
+let fn: NumberToNumberFunc = reAdd(1);
 
-calc(30, (result: number) => console.log(`result is ${result}`))    // 90
+let result = fn(2);
+
+console.log(result);    // 3
+console.log(reAdd(1)(2));   // 3
+console.log(reAdd(1));   // [Function: _add]
