@@ -1,14 +1,23 @@
-// 매개변수에 비구조화 할당문 사용
+// 색인 키와 값으로 객체 만들기
 
-export type Person = { name: string, age: number };
+const makeObj = (key: string, value: any) => ({ [key]: value })
+const makeObj2 = (key: string, value: any) => ({ key: value })
 
-// 컴파일러가 중괄호를 객체로 해석하게 하려면 객체를 소괄호 ( ) 로 감싸주어야 함
-const makePerson1 = (name: string, age: number = 10): Person => ({ name, age })
+console.log(makeObj('name', 'assu'))    // { name: 'assu' }
+console.log(makeObj('age', 20))         // { age: 20 }
 
-// 매개변수에 비구조화 할당문 적용
-const makePerson2 = ({ name, age }: Person) => ({ name, age })
-const makePerson3 = ({ name, age }: Person): void =>
-    console.log(`name: ${name}, age: ${age}`)
+console.log(makeObj2('name', 'assu'))    // { key: 'assu' }
+console.log(makeObj2('age', 20))         // { key: 20 }
 
-makePerson2({name: 'assu', age: 10})
-makePerson3({name: 'assu', age: 20})   // name: assu, age: 20
+
+// 색인 가능 타입을 사용하여 속성명만 다른 객체를 만드는 코드
+type KeyValueType = {
+    [key: string]: string
+}
+
+const makeObj3 = (key: string, value: string): KeyValueType => (
+    { [key]: value }
+)
+
+console.log(makeObj3('name', 'assu'))       // { name: 'assu' }
+console.log(makeObj3('name2', 'jhlee'))     // { name2: 'jhlee' }
