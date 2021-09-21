@@ -1,6 +1,10 @@
-// map 메서드 - number[] 타입 배열을 string[] 타입 배열로 가공
+// reduce 메서드
 
 import {range} from "./range";
 
-let names: string[] = range(1, 5+1).map((value, index) => `[${index}]: ${value}`)
-console.log(names)  // [ '[0]: 1', '[1]: 2', '[2]: 3', '[3]: 4', '[4]: 5' ]
+let reduceSum: number = range(1, 100+1).reduce((result: number, value: number) => result + value, 0)
+console.log(reduceSum)  // 5050
+
+// 곱하기는 0 을 곱하면 안되니까 두 번째 인수에 1을 넣어준다.
+let reduceMultiply: number = range(1, 10+1).reduce((result: number, value: number) => result * value, 1)
+console.log(reduceMultiply) // 3628800
