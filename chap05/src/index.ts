@@ -1,8 +1,5 @@
-// split, join
+// 배열의 비구조화
 
-console.log('hello'.split(''))          // [ 'h', 'e', 'l', 'l', 'o' ]
-console.log('h_e_l_l_o'.split('_'))     // [ 'h', 'e', 'l', 'l', 'o' ]
-
-console.log([ 'h', 'e', 'l', 'l', 'o' ].join())     // h,e,l,l,o
-console.log([ 'h', 'e', 'l', 'l', 'o' ].join(''))   // hello
-console.log([ 'h', 'e', 'l', 'l', 'o' ].join('_'))  // h_e_l_l_o
+let array = [1,2,3,4,5]
+let [first, second, third, ...rest] = array
+console.log(first, second, third, rest)     // 1 2 3 [ 4, 5 ]
