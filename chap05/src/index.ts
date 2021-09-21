@@ -1,8 +1,8 @@
-// 제네릭 방식 타입 추론
+// 전개 연산자를 사용하여 range 함수 구현
 
-let fn = <T>(n: T): T => n
+// 재귀 함수 스타일로 동작하도록 구현
+const range = (from: number, to: number): number[] =>
+    from < to ? [from, ...range(from+1, to)]: []
 
-console.log(
-    fn<boolean>(true),  // true
-    fn(true)        // true
-)
+let numbers: number[] = range(1, 9+1)
+console.log(numbers)    // [1, 2, 3, 4, 5, 6, 7, 8, 9]
