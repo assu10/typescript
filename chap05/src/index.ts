@@ -1,6 +1,8 @@
-//  배열
+// split, join
 
-let a = [1, 2, 3]
-let o = {name: 'assu'}
+console.log('hello'.split(''))          // [ 'h', 'e', 'l', 'l', 'o' ]
+console.log('h_e_l_l_o'.split('_'))     // [ 'h', 'e', 'l', 'l', 'o' ]
 
-console.log(Array.isArray(a), Array.isArray(o)) // true, false
+console.log([ 'h', 'e', 'l', 'l', 'o' ].join())     // h,e,l,l,o
+console.log([ 'h', 'e', 'l', 'l', 'o' ].join(''))   // hello
+console.log([ 'h', 'e', 'l', 'l', 'o' ].join('_'))  // h_e_l_l_o
