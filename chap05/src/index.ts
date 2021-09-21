@@ -1,6 +1,6 @@
-// map 메서드 - 제곱 구하기
+// map 메서드 - number[] 타입 배열을 string[] 타입 배열로 가공
 
 import {range} from "./range";
 
-let squared: number[] = range(1, 5+1).map((value: number) => value * value)
-console.log(squared)    // [ 1, 4, 9, 16, 25 ]
+let names: string[] = range(1, 5+1).map((value, index) => `[${index}]: ${value}`)
+console.log(names)  // [ '[0]: 1', '[1]: 2', '[2]: 3', '[3]: 4', '[4]: 5' ]
