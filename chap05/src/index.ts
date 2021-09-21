@@ -1,8 +1,10 @@
-// 전개 연산자를 사용하여 range 함수 구현
+// filter 메서드 - 홀짝 구하기
 
-// 재귀 함수 스타일로 동작하도록 구현
-const range = (from: number, to: number): number[] =>
-    from < to ? [from, ...range(from+1, to)]: []
+import {range} from "./range";
 
-let numbers: number[] = range(1, 9+1)
-console.log(numbers)    // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+const array: number[] = range(1, 10+1)
+
+let odds: number[] = array.filter((value => value % 2 != 0))
+let evens: number[] = array.filter((value => value % 2 == 0))
+
+console.log(odds, evens)    // [ 1, 3, 5, 7, 9 ] [ 2, 4, 6, 8, 10 ]
