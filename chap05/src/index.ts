@@ -1,10 +1,11 @@
-// filter 메서드 - 홀짝 구하기
+// filter 메서드 - 배열 반으로 나누기
 
 import {range} from "./range";
 
 const array: number[] = range(1, 10+1)
+const half = array.length / 2
 
-let odds: number[] = array.filter((value => value % 2 != 0))
-let evens: number[] = array.filter((value => value % 2 == 0))
+let belowHalf: number[] = array.filter((value, index) => index < half)
+let overHalf: number[] = array.filter((value, index) => index >= half)
 
-console.log(odds, evens)    // [ 1, 3, 5, 7, 9 ] [ 2, 4, 6, 8, 10 ]
+console.log(belowHalf, overHalf)    // [ 1, 2, 3, 4, 5 ] [ 6, 7, 8, 9, 10 ]
