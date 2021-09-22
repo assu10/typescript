@@ -1,13 +1,6 @@
-// 순수 함수로 가변 인수 함수 구현
+// 튜플 - 튜플에 비구조화 할당 적용
 
-import { mergeArray } from "./mergeArray";
+import { doSomething } from "./doSomething";
 
-const mergedArray1: string[] = mergeArray(
-    ['hello'], ['world']
-)
-console.log(mergedArray1)   // [ 'hello', 'world' ]
-
-const mergedArray2: number[] = mergeArray(
-    [1], [2,3], [3,4,5]
-)
-console.log(mergedArray2)   // [ 1, 2, 3, 3, 4, 5 ]
+const [result, errorMsg] = doSomething()
+console.log(result, errorMsg)   // false Error occurs...
