@@ -1,11 +1,13 @@
-// 순수 함수로 sort 메서드로 구현
+// 순수 함수로 가변 인수 함수 구현
 
-const pureSort = <T>(array: readonly T[]): T[] => {
-    let deepCopied = [...array]
-    return deepCopied.sort()
-}
+import { mergeArray } from "./mergeArray";
 
-const beforeArray: number[] = [1,5,4,3]
-const afterArray = pureSort(beforeArray)
+const mergedArray1: string[] = mergeArray(
+    ['hello'], ['world']
+)
+console.log(mergedArray1)   // [ 'hello', 'world' ]
 
-console.log(beforeArray, afterArray)    // [ 1, 5, 4, 3 ] [ 1, 3, 4, 5 ]
+const mergedArray2: number[] = mergeArray(
+    [1], [2,3], [3,4,5]
+)
+console.log(mergedArray2)   // [ 1, 2, 3, 3, 4, 5 ]
