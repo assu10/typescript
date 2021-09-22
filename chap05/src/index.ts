@@ -1,17 +1,9 @@
-// 깊은 복사, 얕은 복사
+// 전개 연산자를 사용하여 배열 깊은 복사 하기
 
 // 깊은 복사
-let original: number = 1
-let copied = original
+const array = [1,2,3,3,4,5]
+const deepCopiedArray = [...array]  // 전개 연산자 사용
 
-copied += 2
+deepCopiedArray[0] = 10
 
-console.log(original, copied)   // 1 3
-
-
-// 얕은 복사
-const originalArr = [1,2,3,4]
-const shallowCopiedArr = originalArr
-
-shallowCopiedArr[0] = 10
-console.log(originalArr, shallowCopiedArr)  // [ 10, 2, 3, 4 ] [ 10, 2, 3, 4 ]
+console.log(array, deepCopiedArray) // [ 1, 2, 3, 3, 4, 5 ] [ 10, 2, 3, 3, 4, 5 ]
