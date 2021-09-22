@@ -1,9 +1,11 @@
-// 전개 연산자를 사용하여 배열 깊은 복사 하기
+// 순수 함수로 sort 메서드로 구현
 
-// 깊은 복사
-const array = [1,2,3,3,4,5]
-const deepCopiedArray = [...array]  // 전개 연산자 사용
+const pureSort = <T>(array: readonly T[]): T[] => {
+    let deepCopied = [...array]
+    return deepCopied.sort()
+}
 
-deepCopiedArray[0] = 10
+const beforeArray: number[] = [1,5,4,3]
+const afterArray = pureSort(beforeArray)
 
-console.log(array, deepCopiedArray) // [ 1, 2, 3, 3, 4, 5 ] [ 10, 2, 3, 3, 4, 5 ]
+console.log(beforeArray, afterArray)    // [ 1, 5, 4, 3 ] [ 1, 3, 4, 5 ]
