@@ -1,7 +1,12 @@
-// Iterable<T> 와 Iterator<T> 인터페이스
+// 생성기 (generator)
 
-import { StringIterable } from "./StringIterable";
+import { generator } from "./generator";
 
-for (let value of new StringIterable(['hello', 'world', '!'])) {
-    console.log(value)  // hello world !
+for (let value of generator()) {
+    console.log(value)
+/*    generator start..
+    1
+    2
+    3
+    generator end..*/
 }
