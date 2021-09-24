@@ -1,12 +1,23 @@
-// 생성기 (generator)
+// `setInterval` 함수와 생성기 비교
 
-import { generator } from "./generator";
+const period: number = 1000
+let count: number = 0
 
-for (let value of generator()) {
-    console.log(value)
-/*    generator start..
-    1
-    2
-    3
-    generator end..*/
-}
+console.log('start..')
+
+const id = setInterval(() => {
+    if (count >= 3) {
+        clearInterval(id)
+        console.log('end..')
+    } else {
+        console.log(++count)
+    }
+}, period)
+
+/*
+start..
+1
+2
+3
+end..
+*/
