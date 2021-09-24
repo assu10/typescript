@@ -1,9 +1,7 @@
-// `for...of` 구문과 `[Symbol.iterator]` 메서드 - 정상
+// Iterable<T> 와 Iterator<T> 인터페이스
 
-import { RangeIterable } from "./RangeIterable";
+import { StringIterable } from "./StringIterable";
 
-const iterator = new RangeIterable(1, 3+1)
-
-for (let value of iterator) {
-    console.log(value)  // 1 2 3
+for (let value of new StringIterable(['hello', 'world', '!'])) {
+    console.log(value)  // hello world !
 }
