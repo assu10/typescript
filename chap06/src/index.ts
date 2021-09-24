@@ -1,11 +1,13 @@
-// for...of
+// 반복기와 반복기 제공자
 
-const numArray: number[] = [1, 2, 3]
-for (let value of numArray) {
-    console.log(value)  //  1 2 3
-}
+import { createRangeIterable } from "./createRangeIterable";
 
-const strArray: string[] = ['a', 'b', 'c']
-for (let value of strArray) {
-    console.log(value)  // a b c
+const iterator = createRangeIterable(1, 3+1)    // 반복기는 현재 동작하지 않음
+
+while(true) {
+    const {value, done} = iterator.next();  // 반복기 동작
+    if (done) {
+        break
+    }
+    console.log(value)  // 1 2 3
 }
