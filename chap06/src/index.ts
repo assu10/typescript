@@ -1,18 +1,16 @@
-// 반복기 제공자의 메서드로 동작하는 생성기 구현
+// yield*` 키워드
 
-class IterableUsingGenerator<T> implements Iterable<T> {
-    constructor(private values: T[] = [], private currentIndex: number = 0) { }
-    [Symbol.iterator] = function* () {
-        while (this.currentIndex < this.values.length) {        // "noImplicitThis": false
-            yield this.values[this.currentIndex++]
-        }
-    }
+function* gen12() {
+    yield 1
+    yield 2
 }
 
-for (let item of new IterableUsingGenerator([1, 2, 3])) {
-    console.log(item)   //  1 2 3
+function* gen12345() {
+    yield* gen12()
+    yield* [3,4]
+    yield 5
 }
 
-for (let item of new IterableUsingGenerator(['hello', 'world', '!'])) {
-    console.log(item)   // hello world !
+for (let value of gen12345()) {
+    console.log(value)  // 1 2 3 4 5
 }
