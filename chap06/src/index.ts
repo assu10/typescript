@@ -1,9 +1,9 @@
-// `for...of` 구문과 `[Symbol.iterator]` 메서드 - 오류
+// `for...of` 구문과 `[Symbol.iterator]` 메서드 - 정상
 
-import { createRangeIterable } from "./createRangeIterable";
+import { RangeIterable } from "./RangeIterable";
 
-const iterator = createRangeIterable(1, 3+1)    // 반복기는 현재 동작하지 않음
+const iterator = new RangeIterable(1, 3+1)
 
-for (let value of iterator) {   // TS2488: Type '{ next(): { value: number | undefined; done: boolean; }; }' must have a '[Symbol.iterator]()' method that returns an iterator.
-    console.log(value)
+for (let value of iterator) {
+    console.log(value)  // 1 2 3
 }
