@@ -1,21 +1,10 @@
-// Promise.resolve
+// Promise.all
 
-Promise.resolve(1)
-    .then(value =>
-        console.log(value)  // 1
-    );
+const getAllResolveResult = <T>(promises: Promise<T>[]) => Promise.all(promises);
 
-Promise.resolve([1, 2, 3])
-    .then(value =>
-        console.log(value)  // [ 1, 2, 3 ]
-    );
+getAllResolveResult<any>([Promise.resolve(true), Promise.resolve('hello')])
+    .then(result => console.log(result));   // [ true, 'hello' ]
 
-Promise.resolve({name: 'assu', age: 20})
-    .then(value =>
-        console.log(value)  // { name: 'assu', age: 20 }
-    );
-
-Promise.reject(new Error('error occured...'))
-    .catch ((err: Error) =>
-        console.log('error:', err.message)
-    );
+getAllResolveResult<any>([Promise.reject(new Error('error~')), Promise.resolve(1)])
+    .then(result => console.log(result))    // 호출되지 않음
+    .catch(error => console.log('error: ', error.message));     // error:  error~
