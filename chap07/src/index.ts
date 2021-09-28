@@ -1,10 +1,12 @@
-// Promise.all
+// Promise.race
 
-const getAllResolveResult = <T>(promises: Promise<T>[]) => Promise.all(promises);
+Promise.race([Promise.resolve('assu'), Promise.resolve('hello')])
+    .then(value => console.log(value)); // assu
 
-getAllResolveResult<any>([Promise.resolve(true), Promise.resolve('hello')])
-    .then(result => console.log(result));   // [ true, 'hello' ]
+Promise.race([Promise.resolve(true), Promise.reject(new Error('error~'))])
+    .then(value => console.log(value))  // true
+    .catch(error => console.log(error.message));    // 호출되지 않음
 
-getAllResolveResult<any>([Promise.reject(new Error('error~')), Promise.resolve(1)])
-    .then(result => console.log(result))    // 호출되지 않음
-    .catch(error => console.log('error: ', error.message));     // error:  error~
+Promise.race([Promise.reject(new Error('error~')), Promise.resolve(true)])
+    .then(value => console.log(value))  // 호출되지 않음
+    .catch(error => console.log(error.message));    // error~
