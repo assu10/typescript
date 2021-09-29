@@ -1,29 +1,13 @@
-// 클로저
+// compose 함수
 
-// () => string 는 makeNames 의 리턴 타입으로 안쪽 유효 범위의 (): string 에 해당
-const makeNames = (): () => string => { // 바깥쪽 유효 범위
-    const names = ['assu', 'jhlee'];
-    let index = 0;
-    return (): string => {  //  안쪽 유효 범위
-        if (index == names.length) {
-            index = 0
-        }
-        console.log(index);
-        return names[index++];
-    }
-}
+import { compose } from "./compose";
+import { f, g, h } from "./fgh"
 
-const makeName: () => string = makeNames();
-console.log(
-    [1,2,3,4,7,6].map(n => makeName())
-);
+const composedFGH = compose(h, g, f);
+console.log(composedFGH('x'));  // h(g(f(x)))
 
-/*
-0
-1
-0
-1
-0
-1
-[ 'assu', 'jhlee', 'assu', 'jhlee', 'assu', 'jhlee' ]
-*/
+
+const inc = (x: number) => x + 1;
+
+const composedInc = compose(inc, inc, inc);
+console.log(composedInc(1));    // 4
