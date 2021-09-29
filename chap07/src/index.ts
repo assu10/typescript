@@ -1,12 +1,39 @@
-// Promise.race
+// async/await - async 함수 특징
 
-Promise.race([Promise.resolve('assu'), Promise.resolve('hello')])
-    .then(value => console.log(value)); // assu
+const test1 = async() => {
+    let value = await 1;
+    console.log(value)  // 1
+    value = await Promise.resolve(2);
+    console.log(value);
+}
 
-Promise.race([Promise.resolve(true), Promise.reject(new Error('error~'))])
-    .then(value => console.log(value))  // true
-    .catch(error => console.log(error.message));    // 호출되지 않음
+async function test2() {
+    let value = await 'hello';
+    console.log(value);
+    value = await Promise.resolve('assu');
+    console.log(value);
+}
 
-Promise.race([Promise.reject(new Error('error~')), Promise.resolve(true)])
-    .then(value => console.log(value))  // 호출되지 않음
-    .catch(error => console.log(error.message));    // error~
+// async 함수를 일반 함수처럼 사용
+//test1();
+//test2();
+
+/*
+1
+hello
+2
+assu
+*/
+
+
+
+// async 함수를 Promise 객체로 사용
+test1()
+    .then(() => test2())
+
+/*
+1
+2
+hello
+assu
+*/
