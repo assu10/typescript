@@ -21,3 +21,19 @@ const add3: ThirdOrderFunc<number, number> =
         (y: number): FirstOrderFunc<number, number> =>
             (z: number): number => x + y + z;
 //console.log(add3(1)(2)(3)); // 6
+
+
+// 부분 적용 함수
+const add2_1: FirstOrderFunc<number, number> = add2(1);
+console.log(
+    add2_1(2),      // 3
+    add2(1)(2)  // 3
+);
+
+const add3_1: SecondOrderFunc<number, number> = add3(1);
+const add2_2: FirstOrderFunc<number, number> = add3_1(2);
+console.log(
+    add2_2(3),              // 6
+    add3_1(2)(3),       // 6
+    add3(1)(2)(3)   // 6
+);
