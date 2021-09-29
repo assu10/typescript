@@ -8,6 +8,7 @@
     "baseUrl": ".",
     "sourceMap": true,
     "strict": true,
+    "noImplicitAny": false,
     "noImplicitThis": false,
     "paths": { "*": ["node_modules/*"] }
   },
