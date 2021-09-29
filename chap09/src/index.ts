@@ -1,8 +1,14 @@
 //import { range } from "ramda";
 import * as R from 'ramda'
 
+const sum = (...numbers: number[]): number =>
+    numbers.reduce((result: number, sum: number) => result + sum, 0);
+
+const curriedSum = R.curryN(3, sum);
+
 console.log(
-    R.add(1, 2),    // 3, 매개변수가 2개인 일반함수
-    R.add(1)(2)     // 3, 2차 고차 함수
-    //R.add(1, 2, 3), // TS2554: Expected 1-2 arguments, but got 3.
+    curriedSum(),               // [Function (anonymous)]
+    curriedSum(1),         // [Function (anonymous)]
+    curriedSum(1)(2),      // [Function (anonymous)]
+    curriedSum(1)(2)(3)    // 6
 )
