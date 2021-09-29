@@ -1,21 +1,29 @@
-// 클로저 - 자유 변수
+// 클로저
 
-function add(x: number): (p1: number) => number {
-    return function(y: number): number {
-        return x + y;
+// () => string 는 makeNames 의 리턴 타입으로 안쪽 유효 범위의 (): string 에 해당
+const makeNames = (): () => string => { // 바깥쪽 유효 범위
+    const names = ['assu', 'jhlee'];
+    let index = 0;
+    return (): string => {  //  안쪽 유효 범위
+        if (index == names.length) {
+            index = 0
+        }
+        console.log(index);
+        return names[index++];
     }
 }
 
-// 오류
+const makeName: () => string = makeNames();
+console.log(
+    [1,2,3,4,7,6].map(n => makeName())
+);
+
 /*
-function add2(x: number): number {
-    return function(y: number): number {    // TS2322: Type '(y: number) => number' is not assignable to type 'number'.
-        return x + y;
-    }
-}*/
-
-const add1 = add(1);
-console.log(add1);  // [Function (anonymous)]
-
-const result = add1(2);
-console.log(result) // 3
+0
+1
+0
+1
+0
+1
+[ 'assu', 'jhlee', 'assu', 'jhlee', 'assu', 'jhlee' ]
+*/
