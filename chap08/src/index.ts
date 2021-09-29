@@ -1,11 +1,14 @@
-// 부분 함수와 함수 조합
+// 포인트가 없는 함수 - map
 
 import { pipe } from "./pipe";
 
-// 2차 고차 함수
-const add2 = (x: number) => (y: number) => x + y;
-const inc = add2(1);    // add2의 부분함수
-console.log(inc);   // [Function (anonymous)]
+const map = (f: any) => (a: any) => a.map(f);
+//const map2 = <T, R>(f: (T) => R) => (a: T[]): R[] => a.map(f)
 
-const add3 = pipe(inc, add2(2));
-console.log(add3(1));   // 4
+const square = (value: any) => value * value;
+const squareMap = map(square);  // 아래처럼 굳이 a 를 지정하지 않아도 된다
+//const squareMap2 = a => map(square);
+
+const fourSquare = pipe(squareMap, squareMap);
+
+console.log(fourSquare([3, 4]));    // [81, 256]
