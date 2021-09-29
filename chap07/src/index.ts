@@ -1,39 +1,8 @@
-// async/await - async 함수 특징
+// async 함수가 반환하는 값 의미
 
-const test1 = async() => {
-    let value = await 1;
-    console.log(value)  // 1
-    value = await Promise.resolve(2);
-    console.log(value);
-}
+const asyncReturn = async() => {
+    return [1, 2, 3]
+};
 
-async function test2() {
-    let value = await 'hello';
-    console.log(value);
-    value = await Promise.resolve('assu');
-    console.log(value);
-}
-
-// async 함수를 일반 함수처럼 사용
-//test1();
-//test2();
-
-/*
-1
-hello
-2
-assu
-*/
-
-
-
-// async 함수를 Promise 객체로 사용
-test1()
-    .then(() => test2())
-
-/*
-1
-2
-hello
-assu
-*/
+asyncReturn()
+    .then(value => console.log(value)); // [ 1, 2, 3 ]
