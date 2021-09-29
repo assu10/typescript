@@ -1,14 +1,10 @@
 //import { range } from "ramda";
 import * as R from 'ramda'
 
-const sum = (...numbers: number[]): number =>
-    numbers.reduce((result: number, sum: number) => result + sum, 0);
+const originalArray: number[] = [1, 2, 3];
 
-const curriedSum = R.curryN(3, sum);
+const resultArray: number[] = R.pipe(
+    R.map(R.add(1))
+)(originalArray);
 
-console.log(
-    curriedSum(),               // [Function (anonymous)]
-    curriedSum(1),         // [Function (anonymous)]
-    curriedSum(1)(2),      // [Function (anonymous)]
-    curriedSum(1)(2)(3)    // 6
-)
+console.log(originalArray, resultArray);    // [ 1, 2, 3 ] [ 2, 3, 4 ]
