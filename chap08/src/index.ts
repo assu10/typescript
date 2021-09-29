@@ -1,17 +1,11 @@
-// compose 함수
+// 부분 함수와 함수 조합
 
-import { f, g, h } from "./fgh"
-import { compose } from "./compose";
 import { pipe } from "./pipe";
 
-const composedFGH = compose(h, g, f);
-console.log(composedFGH('x'));  // h(g(f(x)))
+// 2차 고차 함수
+const add2 = (x: number) => (y: number) => x + y;
+const inc = add2(1);    // add2의 부분함수
+console.log(inc);   // [Function (anonymous)]
 
-
-const inc = (x: number) => x + 1;
-const composedInc = compose(inc, inc, inc);
-console.log(composedInc(1));    // 4
-
-
-const pipedFGH = pipe(h, g, f);
-console.log(pipedFGH('x'));     // f(g(h(x)))
+const add3 = pipe(inc, add2(2));
+console.log(add3(1));   // 4
