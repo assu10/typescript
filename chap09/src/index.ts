@@ -1,61 +1,39 @@
 import * as R from 'ramda'
 import {IPerson, makeRandomIPerson} from "./model/person";
 
-const getter = (lens) => R.view(lens);
-const setter = (lens) => <T>(newValue: T) => R.set(lens, newValue);
-const setterUsingFunc = (lens) => <T, R>(func: (T) => R) => R.over(lens, func);
-
-// 활용
-const longitudeLens = R.lensPath(['location', 'coordinates', 'longitude']); // 렌즈 생성
-console.log('longitudeLens', longitudeLens);     // [Function (anonymous)]
-
-const getLongitude = getter(longitudeLens);
-console.log('getLongitude', getLongitude);      //  [Function: f1]
-
-const setLongitude = setter(longitudeLens);
-console.log('setLongitude', setLongitude);      // [Function (anonymous)]
-
-const setLongitudeUsingFunc = setterUsingFunc(longitudeLens);
-console.log('setLongitudeUsingFunc', setLongitudeUsingFunc);        // [Function (anonymous)]
-
 const person: IPerson = makeRandomIPerson();
-
-const longitude = getLongitude(person);
-console.log('longitude', longitude);    // -88.99555
-
-const newPerson = setLongitude(0.12345)(person);
-console.log('newPerson', newPerson);
+const pairs: [string, any][] = R.toPairs(person);
+console.log('pairs: ', pairs);
 /*
-newPerson {
-    name: 'Charles Hudson',
-        age: 63,
-        title: 'Biotechnical Researcher',
-        location: {
-        country: 'UM',
-            city: 'Tipedivot',
-            address: '874 Wazvod Court',
-            coordinates: { latitude: 2.4853, longitude: 0.12345 }
+pairs:  [
+  [ 'name', 'Willie James' ],
+  [ 'age', 53 ],
+  [ 'title', 'Technical Support Specialist' ],
+  [
+    'location',
+    {
+      country: 'IE',
+      city: 'Itmitu',
+      address: '1910 Maizo View',
+      coordinates: [Object]
     }
-}
+  ]
+]
 */
 
-const anotherPerson = setLongitudeUsingFunc(R.add(0.12345))(person);
-console.log('anotherPerson', anotherPerson);
-/*
-anotherPerson {
-    name: 'Trevor Schultz',
-        age: 57,
-        title: 'Food & Beverage Director',
+// TS2739: Type '{ [index: string]: any; }' is missing the following properties from type 'IPerson': name, age
+//const person2: IPerson = R.fromPairs(pairs);  // 오류
+const person3: IPerson = R.fromPairs(pairs) as IPerson;
+console.log('person3', person3);
+/*person3 {
+    name: 'Willie James',
+        age: 53,
+        title: 'Technical Support Specialist',
         location: {
-        country: 'MC',
-            city: 'Rarito',
-            address: '484 Deha Square',
-            coordinates: { latitude: -65.29564, longitude: 26.61039 }
+        country: 'IE',
+            city: 'Itmitu',
+            address: '1910 Maizo View',
+            coordinates: { latitude: 37.34966, longitude: 169.75269 }
     }
-}
-*/
+}*/
 
-console.log(
-    longitude, getLongitude(newPerson), getLongitude(anotherPerson)
-);
-// 164.50159 0.12345 164.62503999999998
