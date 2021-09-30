@@ -1,15 +1,10 @@
 import * as R from 'ramda'
 
-const array = R.range(1, 2+1).map((x: number) => {
-    return R.range(1, 2+1).map((y: number) => {
-        return [x, y];
-    });
-});
+type voidToNumberFunc = () => number;
+const makeRandomNumber = (max: number): voidToNumberFunc =>
+    (): number => Math.floor(Math.random() * max);
 
-console.log(array); // [ [ [ 1, 1 ], [ 1, 2 ] ], [ [ 2, 1 ], [ 2, 2 ] ] ]
+const array = R.range(1, 5+1).map(makeRandomNumber(100));
+const sortedArray = R.sort((a: number, b: number): number => a-b)(array);
 
-const unnestedArray = R.unnest(array);
-console.log(unnestedArray);     // [ [ 1, 1 ], [ 1, 2 ], [ 2, 1 ], [ 2, 2 ] ]
-
-const twoUnnestedArray = R.pipe(R.unnest, R.unnest)(array);
-console.log(twoUnnestedArray);  // [1, 1, 1, 2, 2, 1, 2, 2]
+console.log(array, sortedArray);    // [ 9, 54, 43, 28, 11 ] [ 9, 11, 28, 43, 54 ]
