@@ -8,5 +8,8 @@ const array = R.range(1, 2+1).map((x: number) => {
 
 console.log(array); // [ [ [ 1, 1 ], [ 1, 2 ] ], [ [ 2, 1 ], [ 2, 2 ] ] ]
 
-const flatArray = R.flatten(array);
-console.log(flatArray); // [1, 1, 1, 2, 2, 1, 2, 2]
+const unnestedArray = R.unnest(array);
+console.log(unnestedArray);     // [ [ 1, 1 ], [ 1, 2 ], [ 2, 1 ], [ 2, 2 ] ]
+
+const twoUnnestedArray = R.pipe(R.unnest, R.unnest)(array);
+console.log(twoUnnestedArray);  // [1, 1, 1, 2, 2, 1, 2, 2]
