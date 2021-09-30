@@ -1,21 +1,33 @@
 import * as R from 'ramda'
 import {IPerson, makeRandomIPerson} from "./model/person";
 
-const keys: string[] = R.keys(makeRandomIPerson());
-console.log('keys', keys);  // keys [ 'name', 'age', 'title', 'location' ]
+const originalPerson: IPerson = makeRandomIPerson();
+const keys: string[] = R.keys(originalPerson);
+const values: any[] = R.values(originalPerson);
 
-const values: any[] = R.values(makeRandomIPerson());
-console.log('values', values);
+const zippedPerson: IPerson = R.zipObj(keys, values) as IPerson;
+
+console.log('originalPerson: ', originalPerson, 'zippedPerson: ', zippedPerson);
 /*
-values [
-    'Eliza Riley',
-        58,
-        'Traffic Manager',
-        {
-            country: 'CL',
-            city: 'Pubuceb',
-            address: '1563 Nule Turnpike',
-            coordinates: { latitude: -64.73081, longitude: 8.88806 }
-        }
-    ]
+originalPerson:  {
+    name: 'Bertha Gonzalez',
+        age: 64,
+        title: 'Producer',
+        location: {
+        country: 'BQ',
+            city: 'Fifcuwusu',
+            address: '381 Vigfor Loop',
+            coordinates: { latitude: -54.04413, longitude: 56.24533 }
+    }
+} zippedPerson:  {
+    name: 'Bertha Gonzalez',
+        age: 64,
+        title: 'Producer',
+        location: {
+        country: 'BQ',
+            city: 'Fifcuwusu',
+            address: '381 Vigfor Loop',
+            coordinates: { latitude: -54.04413, longitude: 56.24533 }
+    }
+}
 */
