@@ -1,16 +1,7 @@
 import * as R from 'ramda'
 
-// 포인트가 있는 함수 형태
-const inc = (b: number): number => R.add(1)(b);
-console.log(inc);   // [Function: inc]
-
-// 포인트가 없는 함수 형태
-const inc2 = R.add(1);
-console.log(inc2);  // [Function: f1]
-
-// R.map 에 포인트가 있는 형태로 사용
-R.map((n: number) => inc(n));
-
-// R.map 에 포인트가 없는 형태로 사용
-R.map(inc);
-R.map(R.add(1));
+const incNumbers = R.pipe(
+    R.map(R.add(1)),    // 포인트가 없는 함수
+    R.tap(a => console.log('after add(1): ', a))    // after add(1):  [2, 3, 4,  5, 6, 7, 8, 9, 10]
+);
+const newNumbers = incNumbers(R.range(1, 9+1));
