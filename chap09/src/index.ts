@@ -1,79 +1,61 @@
 import * as R from 'ramda'
 import {IPerson, makeRandomIPerson} from "./model/person";
 
-const makeLens = (propName: string) => R.lens(R.prop(propName), R.assoc(propName));
-
 const getter = (lens) => R.view(lens);
 const setter = (lens) => <T>(newValue: T) => R.set(lens, newValue);
 const setterUsingFunc = (lens) => <T, R>(func: (T) => R) => R.over(lens, func);
 
 // 활용
-const nameLens = makeLens('name');
-console.log('nameLens', nameLens);  // [Function (anonymous)]
+const longitudeLens = R.lensPath(['location', 'coordinates', 'longitude']); // 렌즈 생성
+console.log('longitudeLens', longitudeLens);     // [Function (anonymous)]
 
-const getName = getter(nameLens);
-console.log('getName', getName);   // [Function: f1]
+const getLongitude = getter(longitudeLens);
+console.log('getLongitude', getLongitude);      //  [Function: f1]
 
-const setName = setter(nameLens);
-console.log('nameLens', nameLens);  // [Function (anonymous)]
+const setLongitude = setter(longitudeLens);
+console.log('setLongitude', setLongitude);      // [Function (anonymous)]
 
-const setNameUsingFunc = setterUsingFunc(nameLens);
-console.log('setNameUsingFunc', setNameUsingFunc);  // [Function (anonymous)]
+const setLongitudeUsingFunc = setterUsingFunc(longitudeLens);
+console.log('setLongitudeUsingFunc', setLongitudeUsingFunc);        // [Function (anonymous)]
 
 const person: IPerson = makeRandomIPerson();
 
-const name = getName(person);
-console.log('name', name);  // Ina White
+const longitude = getLongitude(person);
+console.log('longitude', longitude);    // -88.99555
 
-const newPerson = setName('assu')(person);
+const newPerson = setLongitude(0.12345)(person);
 console.log('newPerson', newPerson);
 /*
 newPerson {
-    name: 'assu',
-        age: 64,
-        title: 'Buyer',
+    name: 'Charles Hudson',
+        age: 63,
+        title: 'Biotechnical Researcher',
         location: {
-        country: 'NF',
-            city: 'Jeicfa',
-            address: '1982 Ugeka Mill',
-            coordinates: { latitude: -48.87136, longitude: -164.53377 }
+        country: 'UM',
+            city: 'Tipedivot',
+            address: '874 Wazvod Court',
+            coordinates: { latitude: 2.4853, longitude: 0.12345 }
     }
 }
 */
 
-const anotherPerson = setNameUsingFunc(name => `Miss ${name}`)(person);
+const anotherPerson = setLongitudeUsingFunc(R.add(0.12345))(person);
 console.log('anotherPerson', anotherPerson);
 /*
 anotherPerson {
-    name: 'Miss Lura Cole',
-        age: 56,
-        title: 'EEO Compliance Manager',
+    name: 'Trevor Schultz',
+        age: 57,
+        title: 'Food & Beverage Director',
         location: {
-        country: 'LK',
-            city: 'Mutubrew',
-            address: '966 Boge Grove',
-            coordinates: { latitude: 29.59275, longitude: -19.68588 }
-    }
-}
-*/
-
-const capitalPerson = setNameUsingFunc(R.toUpper)(person);
-console.log('capitalPerson', capitalPerson);
-/*
-capitalPerson {
-    name: 'LIDA OWEN',
-        age: 35,
-        title: 'Manpower Planner',
-        location: {
-        country: 'TN',
-            city: 'Ekapuvzo',
-            address: '1286 Zoklah Court',
-            coordinates: { latitude: 28.94433, longitude: 177.0845 }
+        country: 'MC',
+            city: 'Rarito',
+            address: '484 Deha Square',
+            coordinates: { latitude: -65.29564, longitude: 26.61039 }
     }
 }
 */
 
 console.log(
-    name, getName(newPerson), getName(anotherPerson), getName(capitalPerson)
-)
-// Rose Gibson assu Miss Rose Gibson ROSE GIBSON
+    longitude, getLongitude(newPerson), getLongitude(anotherPerson)
+);
+// 164.50159 0.12345 164.62503999999998
