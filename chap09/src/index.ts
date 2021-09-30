@@ -1,20 +1,16 @@
-// R.tap 디버깅 함수로 배열 전/후 값 출력
-
-//import { range } from "ramda";
 import * as R from 'ramda'
 
-const numbers: number[] = R.range(1, 9+1);
+// 포인트가 있는 함수 형태
+const inc = (b: number): number => R.add(1)(b);
+console.log(inc);   // [Function: inc]
 
-const incNumbers = R.pipe(
-    R.tap(a => console.log('before inc:', a)),  // "strictFunctionTypes": false, 이게 아니면 TS2769: No overload matches this call.   The last overload gave the following error. 오류 발생
-    R.map(R.inc),
-    R.tap(a => console.log('after inc:', a))
-);
+// 포인트가 없는 함수 형태
+const inc2 = R.add(1);
+console.log(inc2);  // [Function: f1]
 
-const newNumbers: number[] = incNumbers(numbers);
+// R.map 에 포인트가 있는 형태로 사용
+R.map((n: number) => inc(n));
 
-console.log(newNumbers);
-
-/*before inc: [1, 2, 3, 4, 5, 6, 7, 8, 9]
-after inc: [2, 3, 4,  5, 6,7, 8, 9, 10]
-[2, 3, 4,  5, 6, 7, 8, 9, 10]*/
+// R.map 에 포인트가 없는 형태로 사용
+R.map(inc);
+R.map(R.add(1));
