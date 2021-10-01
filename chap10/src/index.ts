@@ -1,17 +1,22 @@
-// TS2351: This expression is not constructable.   Type 'unknown' has no construct signatures.
-//const create = <T>(type: T): T => new type();
+const obj = {name: 'assu', age: 20, city: 'seoul', country: 'korea'};
 
-const create = <T extends {new(): T}>(type: T): T => new type();
+/*const pick = (obj, keys) => keys.map(key => ({[key]: obj[key]}))
+    .reduce((result, value) => ({...result, ...value}), {});
 
-const create2 = <T>(type: new() => T): T => new type();
+console.log(
+    pick(obj, ['name', 'age']), // { name: 'assu', age: 20 }
+    pick(obj, ['nam', 'agge'])  // { nam: undefined, agge: undefined }
+)*/
 
-const create3 = <T>(type: {new(...args): T}, ...args):T => new type(...args);
+// TS2536: Type 'K' cannot be used to index type 'T'.
+/*
+const pick = <T, K>(obj: T, keys: K[]) => keys.map(key => ({[key]: obj[key]}))
+.reduce((result, value) => ({...result, ...value}), {});*/
 
-class Point {
-    constructor(public x: number, public y: number) { }
-}
+const pick = <T, K extends keyof T>(obj: T, keys: K[]) =>
+    keys.map(key => ({[key]: obj[key]}))
+        .reduce((result, value) => ({...result, ...value}), {});
 
-[
-    create3(Date),  // 2021-10-01T07:57:56.458Z
-    create3(Point, 0, 0)    // Point { x: 0, y: 0 }
-].forEach((s) => console.log(s));
+console.log(
+    pick(obj, ['name', 'age']), // { name: 'assu', age: 20 }
+    pick(obj, ['nam', 'agge'])  // TS2322: Type '"agge"' is not assignable to type '"name" | "age" | "city" | "country"'.
