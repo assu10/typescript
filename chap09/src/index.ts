@@ -1,17 +1,13 @@
 import * as R from 'ramda'
 
-type NumberToNumFunc = (n: number) => number;
+// 함수 T 는 value 값을 첫 번째 매개변수로 받는 2차 고차함수
+const T = value => R.pipe(
+    R.applyTo(value),
+    R.tap(value => console.log(value))
+);
 
-const applyDiscount = (minimum: number, discount: number): NumberToNumFunc =>
-    R.pipe(
-        R.ifElse(
-            R.flip(R.gte)(minimum),
-            R.flip(R.subtract)(discount),
-            R.identity
-        ),
-        R.tap(amount => console.log(amount))
-    );
-const calcPrice = applyDiscount(5000, 500);
+// value100 은 첫 번째 매개변수에 100을 대입해서 만든 1차 함수로 R.identity 처럼 매개변수가 한 개인 콜백함수를 입력받을 수 있음
+const value100 = T(100);
 
-const discountedPrice = calcPrice(6000);    // 5500
-const notDiscountedPrice = calcPrice(4500); // 4500
+const sameValue = value100(R.identity);    // 100
+const add1Value = value100(R.add(1));   // 101
