@@ -10,12 +10,19 @@ class Fish {
 }
 
 // 함수
+const isFlyable = (o: Bird | Fish): o is Bird => {
+    return o instanceof Bird;
+}
+const isSwimmable = (o: Bird | Fish): o is Fish => {
+    return o instanceof Fish;
+}
+
 const flyOrSwim = (o: Bird | Fish): void => {
-    if (o instanceof Bird) {
+    if (isFlyable(o)) {
         o.fly();
-    } else if (o instanceof Fish) {
+    } else if (isSwimmable(o)) {
         o.swim();
     }
 }
 
-[new Bird, new Fish].forEach(flyOrSwim);    // fly~ swim~
+[new Bird, new Fish].forEach(flyOrSwim);    // fly~  swim~
