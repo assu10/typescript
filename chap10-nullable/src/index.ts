@@ -1,10 +1,20 @@
-type ICoodinates = {longitude: number}
-type ILocation = {country: string, coords?: ICoodinates}
-type IPerson = {name: string, location?: ILocation}
+import {IFunctor} from "./option/IFunctor";
+import {IValuable} from "./option/IValuable";
+import {Option} from './option/Option'
 
-let person: IPerson = {name: 'assu'}
-let longitude = person?.location?.coords?.longitude ?? 0;
-console.log(longitude);     // undefined 가 아니라 0
+const parseNumber = (n: string): IFunctor<number> & IValuable<number> => {
+    const value = parseInt(n);
+    return isNaN(value) ? Option.None : Option.Some(value);
+}
 
-let n: null = null
-console.log(n??0)   // null 이 아니라 0
+let value = parseNumber('1')
+        .map(value => value + 1)    // 2
+        .map(value => value * 2)    // 4
+        .getOrElse(0)
+console.log(value);         // 4
+
+value = parseNumber('hello')
+    .map(value => value + 1)    // 콜백 함수 호출안됨
+    .map(value => value * 2)    // 콜백 함수 호출안됨
+    .getOrElse(0)
+console.log(value);         // 0
