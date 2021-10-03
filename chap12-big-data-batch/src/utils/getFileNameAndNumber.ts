@@ -5,5 +5,6 @@ export const getFileNameAndNumber = (defaultFilename: string, defaultNumberOfFak
     return [filename || defaultFilename, numberOfFakeData ? parseInt(numberOfFakeData, 10) : defaultNumberOfFakeData];
 };
 
+/*
 const [filename, numberOfFakeItems] = getFileNameAndNumber('data/fake.csv', 500000);
-console.log(filename, numberOfFakeItems);
+console.log(filename, numberOfFakeItems);*/
